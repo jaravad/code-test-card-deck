@@ -187,19 +187,23 @@ const searchParams = new URLSearchParams(queryString);
 const cardsValue = searchParams.get("cards");
 const suitsValue = searchParams.get("suits");
 const ranksValue = searchParams.get("ranks");
+const limitValue = searchParams.get("limit");
 const initialCards = cardsValue?.split(' ')
 const initialSuits = suitsValue?.split(' ')
 const initialRanks = ranksValue?.split(' ').map(rank => Number(rank))
+const limit = limitValue === null ? null : Number(limitValue)
 
 if (initialCards) {
   deck.filter('id', initialCards)
-  deck.drawFiltered()
 }
 if (initialSuits) {
   deck.filter('suit', initialSuits)
-  deck.drawFiltered()
 }
 if (initialRanks) {
   deck.filter('rank', initialRanks)
-  deck.drawFiltered()
 }
+if (limit !== null && limit >=0) {
+  deck.limit(limit)
+}
+
+deck.drawFiltered()
