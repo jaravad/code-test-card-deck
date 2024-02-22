@@ -179,3 +179,27 @@ const deck = new CardDeck(".deck", ".hand");
 
 // Take a look at the deck object and its methods.
 console.log(deck);
+
+// Get search params
+const queryString = window.location.search;
+const searchParams = new URLSearchParams(queryString);
+
+const cardsValue = searchParams.get("cards");
+const suitsValue = searchParams.get("suits");
+const ranksValue = searchParams.get("ranks");
+const initialCards = cardsValue?.split(' ')
+const initialSuits = suitsValue?.split(' ')
+const initialRanks = ranksValue?.split(' ').map(rank => Number(rank))
+
+if (initialCards) {
+  deck.filter('id', initialCards)
+  deck.drawFiltered()
+}
+if (initialSuits) {
+  deck.filter('suit', initialSuits)
+  deck.drawFiltered()
+}
+if (initialRanks) {
+  deck.filter('rank', initialRanks)
+  deck.drawFiltered()
+}
