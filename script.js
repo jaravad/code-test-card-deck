@@ -188,6 +188,7 @@ const cardsValue = searchParams.get("cards");
 const suitsValue = searchParams.get("suits");
 const ranksValue = searchParams.get("ranks");
 const limitValue = searchParams.get("limit");
+const sorted = searchParams.get("sorted")
 const initialCards = cardsValue?.split(' ')
 const initialSuits = suitsValue?.split(' ')
 const initialRanks = ranksValue?.split(' ').map(rank => Number(rank))
@@ -202,8 +203,11 @@ if (initialSuits) {
 if (initialRanks) {
   deck.filter('rank', initialRanks)
 }
-if (limit !== null && limit >=0) {
+if (limit !== null && limit >= 0) {
   deck.limit(limit)
+}
+if (sorted !== null) {
+  deck.sort()
 }
 
 deck.drawFiltered()
